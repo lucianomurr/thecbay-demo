@@ -31,10 +31,10 @@ export default defineConfig(({ mode }) => ({
             {
               contentDir: '/src/content/blog',
               transform: (file: PrerenderContentFile) => {
-                if (file.attributes?.draft) {
+                if (file.attributes?.['draft']) {
                   return false;
                 }
-                return `/archived/${file.attributes.slug || file.name}`;
+                return `/archived/${file.attributes['slug'] || file.name}`;
               },
             },
           ];

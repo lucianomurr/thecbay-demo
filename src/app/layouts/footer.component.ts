@@ -11,9 +11,6 @@ import { Component } from '@angular/core';
             x-data="getCarouselData()"
         >
             
-            <template x-for="image in images.slice(currentIndex, currentIndex + 6)" :key="images.indexOf(image)">
-                <img class="w-1/6 hover:opacity-75" :src="image">
-            </template>
             
         </div>
         <div class="w-full container mx-auto flex flex-col items-center">

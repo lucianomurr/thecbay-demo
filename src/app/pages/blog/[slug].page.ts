@@ -1,32 +1,36 @@
-import { MarkdownComponent, injectContent } from '@analogjs/content';
-import { AsyncPipe, NgIf } from '@angular/common';
+import { injectContent } from '@analogjs/content';
+import { AsyncPipe, NgIf, NgOptimizedImage } from '@angular/common';
 import { Component } from '@angular/core';
 import { PostAttributes } from 'src/app/models/post';
+import { BlogContentComponent } from "../../layouts/blog-content.component";
 
 @Component({
-  standalone: true,
-  imports: [MarkdownComponent, NgIf, AsyncPipe],
-  template: `
-    <div class="content" *ngIf="post$ | async as post">
-      <section class="wrapper" >
-        <div>
-          <h2 class="h1--scalingSize" data-text="An awesome title">
-            {{ post.attributes.title }}
-          </h2>
-        </div>
+    standalone: true,
+    template: `
+    <div class="container mx-auto flex flex-wrap py-6">
+      <!-- Post Section -->
+      <section class="w-full md:w-2/3 flex flex-col items-center px-3">
+        <article
+          class="flex flex-col shadow my-4"
+          *ngIf="post$ | async as post"
+        >
+          <!-- Article Image -->
+          <a href="#" class="hover:opacity-75">
+            <img
+              [ngSrc]="post.attributes.coverImage"
+              width="1000"
+              height="500"
+            />
+          </a>
+
+          <app-blog-content [Title]="post.attributes.title" [Content]="post.content"/>
+
+        </article>
       </section>
-      <img [src]="post.attributes.coverImage" />
-      <analog-markdown [content]="post.content" />
     </div>
   `,
-  styles: `
-  
-  h2{
-    font-size: 6rem;
-    padding: 2rem 0;
-  }
-
-  `,
+    styles: ``,
+    imports: [NgIf, AsyncPipe, NgOptimizedImage, BlogContentComponent]
 })
 export default class BlogPostPage {
   post$ = injectContent<PostAttributes>();

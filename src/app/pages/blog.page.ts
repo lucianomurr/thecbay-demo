@@ -5,8 +5,6 @@ import { RouterOutlet } from '@angular/router';
   standalone: true,
   imports: [RouterOutlet],
   template: `
-    <h1>Welcome to TheCBay blog BLOG</h1>
-
     <router-outlet />
   `,
 })

@@ -19,7 +19,7 @@ import { BlogContentComponent } from "../../layouts/blog-content.component";
             <img
               [ngSrc]="post.attributes.coverImage"
               width="1000"
-              height="500"
+              height="300"
             />
           </a>
 
@@ -29,9 +29,16 @@ import { BlogContentComponent } from "../../layouts/blog-content.component";
       </section>
     </div>
   `,
-    styles: ``,
+    styles: `
+    img{
+      max-height: 300px;
+    }
+    `,
     imports: [NgIf, AsyncPipe, NgOptimizedImage, BlogContentComponent]
 })
 export default class BlogPostPage {
-  post$ = injectContent<PostAttributes>();
+  post$ = injectContent<PostAttributes>({
+    param: 'slug',
+    subdirectory: 'blog',
+  });
 }

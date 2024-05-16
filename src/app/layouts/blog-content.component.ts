@@ -13,7 +13,7 @@ import { Component, Input } from '@angular/core';
       class="line-numbers blog-post container w-full pb-8 pt-4 md:w-11/12 md:px-0 lg:w-3/5"
     >
       <analog-markdown [content]="Content"></analog-markdown>
-      {{ Content }}
+      
     </div>
   `,
   styles: ``,

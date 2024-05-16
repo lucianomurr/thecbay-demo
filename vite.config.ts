@@ -18,23 +18,23 @@ export default defineConfig(({ mode }) => ({
   },
   plugins: [
     analog({
-      nitro: {
-        preset: 'vercel',
-      },
       static: true,
       prerender: {
         routes: async () => {
           return [
             '/',
-            '/blog',
             '/about',
+            '/blog',
             {
-              contentDir: '/src/content/blog',
+              contentDir: 'src/content/blog',
               transform: (file: PrerenderContentFile) => {
-                if (file.attributes?.['draft']) {
+                // do not include files marked as draft in frontmatter
+                if (file.attributes.draft) {
                   return false;
                 }
-                return `/archived/${file.attributes['slug'] || file.name}`;
+                // use the slug from frontmatter if defined, otherwise use the files basename
+                const slug = file.attributes.slug || file.name;
+                return `/blog/${slug}`;
               },
             },
           ];
